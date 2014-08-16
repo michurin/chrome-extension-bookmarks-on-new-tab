@@ -1,0 +1,83 @@
+body {
+  -webkit-user-select: none;
+  font-family: Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: #fff;
+  color: #888;
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+  line-height: 100%;
+}
+
+h1 {
+  margin: 0;
+  padding: 5px 5px;
+  font-size: 18px;
+  background: #eee;
+}
+
+#bookmarks {
+  padding: 4px;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.folder .title .jail:before {
+  content: "☆ ";
+}
+
+.closed-folder .title .jail:before {
+  color: #080;
+  content: "★ ";
+}
+
+.body {
+  padding: 0 0 0 10px;
+}
+
+.item, .title {
+  transition: border-color 120ms ease-in-out;
+  transition: background-color 120ms ease-in-out;
+  border: 1px solid rgba(255, 255, 255, 0);
+  background: rgba(255, 255, 255, 0);
+  cursor: pointer;
+  padding: 5px 7px;
+  vertical-align: bottom;
+  border-radius: 4px;
+  max-width: 190px;
+  display: inline-block;
+}
+
+.closed-folder {
+  display: inline-block;
+}
+
+.item:hover, .title:hover {
+  border-color: rgba(200, 200, 200, 1);
+  background: #f8f8f8;
+}
+
+.jail {
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 0;
+}
+
+.jail-text {
+  vertical-align: middle;
+  display: inline-block;
+}
+
+img {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  display: inline-block;
+  margin: 0 5px 0 0;
+}
+
+.closed-folder .body {
+  display: none;
+}
