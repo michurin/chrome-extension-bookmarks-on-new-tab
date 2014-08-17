@@ -1,8 +1,10 @@
 {
   "name": "Ultra light new tab",
-  "version": "0.1.0.0",
+  "version": "0.1.0.1",
+  "minimum_chrome_version": "16",
 
   "description": "Ultra light new tab with bookmark navigator",
+  "short_name": "Light new tab",
 
   "icons": {
     "16": "icon-16.png",
@@ -17,7 +19,6 @@
 
   "permissions": [
     "storage",
-    "activeTab",
     "chrome://favicon/"
   ],
 
@@ -26,6 +27,7 @@
   ],
 
   "homepage_url": "http://michurin.github.io/",
+  "author": "Alexey Michurin <a.michurin@gmail.com>",
 
   "manifest_version": 2
 }
