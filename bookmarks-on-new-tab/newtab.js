@@ -85,6 +85,14 @@
         build_tree(bookmarks_root_element, childrens, sl);
       });
     });
+    var e = document.getElementById('edit-bookmarks');
+    e.style.display = 'block';
+    e.onclick = function () {
+      chrome.tabs.create({
+        active: true,
+        url: 'chrome://bookmarks/'
+      });
+    };
   }
 
   chrome.permissions.contains(permissions, function (x) {

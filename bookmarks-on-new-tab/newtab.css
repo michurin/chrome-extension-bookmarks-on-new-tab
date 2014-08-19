@@ -20,6 +20,22 @@ h1 {
   padding: 4px;
 }
 
+#edit-bookmarks {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #eee;
+  padding: 5px;
+  font-size: 10px;
+  display: none;
+  color: rgb(200, 200, 200);
+  cursor: pointer;
+}
+
+#edit-bookmarks:hover {
+  color: #444;
+}
+
 .title {
   font-weight: bold;
 }
