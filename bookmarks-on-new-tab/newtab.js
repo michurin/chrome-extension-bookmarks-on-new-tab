@@ -50,6 +50,7 @@
         text = div('jail');
         text.innerText = v.title;
         title.appendChild(text);
+        title.title = v.title;
         title.onclick = function () {
           var x = folder.className;
           var tgt;
