@@ -93,6 +93,10 @@
         url: 'chrome://bookmarks/'
       });
     };
+    chrome.bookmarks.onChanged.addListener(init_bookmarks);
+    chrome.bookmarks.onMoved.addListener(init_bookmarks);
+    chrome.bookmarks.onChildrenReordered.addListener(init_bookmarks);
+    chrome.bookmarks.onImportEnded.addListener(init_bookmarks);
   }
 
   chrome.permissions.contains(permissions, function (x) {
