@@ -1,0 +1,91 @@
+body {
+  user-select: none;
+  -webkit-user-select: none;
+  font-family: Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: #fff;
+  color: #888;
+  font-size: 16px;
+  line-height: 100%;
+}
+
+/* bookmarks tree */
+
+.title {
+  border: 1px solid #000;
+  border-color: #000;
+  border-radius: 5px;
+  background-color: #ccc;
+  cursor: pointer;
+  padding: 5px 10px;
+  display: inline-block;
+  margin: 5px 0 0 0;
+}
+
+.body {
+  padding: 0 0 0 22px;
+  position: relative;
+}
+
+.decor_long {
+  position: absolute;
+  border-width: 0 0 0 2px;
+  border-color: #000;
+  border-style: solid;
+  top: 0px;
+  left: 10px;
+  bottom: 0px;
+  width: 10px;
+}
+
+:last-child > .decor_long {
+  display: none;
+}
+
+.decor_angle {
+  position: absolute;
+  border-width: 0 0 2px 2px;
+  border-color: #000;
+  border-radius: 0 10px;
+  border-style: solid;
+  top: 0px;
+  left: 10px;
+  width: 10px;
+  height: 10px;
+}
+
+.actives .title
+{
+  background-color: #fff;
+}
+
+.actives > div > .title
+{
+  background-color: #000;
+  color: #fff;
+}
+
+/* other */
+
+#reset {
+  text-align: center;
+  display: inline-block;
+  cursor: pointer;
+  padding: 5px;
+  margin: 2px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  background-color: #eee;
+}
+
+#reset div:nth-child(2) {
+  font-size: 60%;
+}
+
+fieldset {
+  border-radius: 5px;
+  border: 1px solid #000;
+}
+
+legend {
+  font-size: 60%;
+}

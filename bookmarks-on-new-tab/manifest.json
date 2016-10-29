@@ -1,33 +1,45 @@
 {
-  "name": "Ultra light new tab",
-  "version": "0.2.1.2",
+  "manifest_version": 2,
+
+  "name": "Ultra light newtab page with bookmarks on it",
+  "version": "0.3.0.0",
   "minimum_chrome_version": "16",
 
   "description": "Ultra light new tab with bookmark navigator",
   "short_name": "Light new tab",
 
+
+  "homepage_url": "http://michurin.github.io/",
+  "author": "Alexey Michurin <a.michurin@gmail.com>",
+
   "icons": {
     "16": "icon-16.png",
+    "24": "icon-24.png",
+    "32": "icon-32.png",
     "48": "icon-48.png",
     "64": "icon-64.png",
     "128": "icon-128.png"
   },
 
-  "chrome_url_overrides" : {
-    "newtab": "newtab.html"
+  "browser_action": {
+    "default_title": "Load bookmarks here",
+    "default_icon": {
+      "16": "icon-16.png",
+      "24": "icon-24.png",
+      "32": "icon-32.png"
+    }
   },
 
-  "permissions": [
-    "storage",
-    "chrome://favicon/"
-  ],
+  "options_page": "options.html",
 
-  "optional_permissions": [
-    "bookmarks"
-  ],
+  "background": {
+    "persistent": false,
+    "scripts": ["background.js"]
+  },
 
-  "homepage_url": "http://michurin.github.io/",
-  "author": "Alexey Michurin <a.michurin@gmail.com>",
+  "chrome_url_overrides": {"newtab": "newtab.html"},
 
-  "manifest_version": 2
+  "permissions": ["storage", "chrome://favicon/"],
+
+  "optional_permissions": ["bookmarks"]
 }

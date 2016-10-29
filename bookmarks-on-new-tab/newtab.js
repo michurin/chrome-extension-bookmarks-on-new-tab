@@ -1,18 +1,21 @@
 /*
  * Ultra light new tab Google chrome extension
- * Copyright (c) 2014 Alexey Michurin <a.michurin@gmail.com>
+ * Copyright (c) 2014-2016 Alexey Michurin <a.michurin@gmail.com>
  * MIT License [http://www.opensource.org/licenses/mit-license.php]
  */
 
-/*global window, chrome */
+/*global window, chrome, permissions_request, bind_listeners, url_openner */
+
+'use strict';
+
+(function () {
+  window.document.getElementById('options').onclick = url_openner('options.html');
+}());
 
 (function () {
 
-  'use strict';
-
   var storage = chrome.storage.local;
   var document = window.document;
-  var permissions = {permissions: ['bookmarks']};
   var bookmarks_root_element = document.getElementById('bookmarks');
 
   function div(c) {
@@ -21,13 +24,13 @@
     return e;
   }
 
-  function build_tree(root_element, childrens, stoplist) {
+  function build_subtree(root_element, childrens, stoplist, is_root) {
     childrens.forEach(function (v) {
-      var text;
-      if (v.id === '0') { // left root node
-        build_tree(root_element, v.children, stoplist);
+      if (is_root) { // left root node
+        build_subtree(root_element, v.children, stoplist, false);
         return;
       }
+      var text;
       if (v.url) {
         var img = document.createElement('img');
         img.src = 'chrome://favicon/size/16@1x/' + v.url;
@@ -67,52 +70,45 @@
         folder.appendChild(title);
         folder.appendChild(body);
         root_element.appendChild(folder);
-        build_tree(body, v.children, stoplist);
+        build_subtree(body, v.children, stoplist, false);
       }
     });
+  }
+
+
+  function redraw_tree() {
+    storage.get({stoplist: null, root_id: null}, function(value) {
+      var stoplist = value.stoplist;
+      var root_id = value.root_id;
+      if (stoplist === null) {
+        stoplist = {};
+      }
+      var reinit_tree = function (childrens) {
+        bookmarks_root_element.innerText = '';
+        bookmarks_root_element.onclick = undefined;
+        bookmarks_root_element.style.cursor = 'default';
+        build_subtree(bookmarks_root_element, childrens, stoplist, true);
+      };
+      if (root_id === null) {
+        chrome.bookmarks.getTree(reinit_tree);
+      } else {
+        chrome.bookmarks.getSubTree(String(root_id), reinit_tree);
+      }
+    });
+  }
+
+  function show_edit_link() {
+    var e = document.getElementById('edit-bookmarks');
+    e.style.display = 'inline-block';
+    e.onclick = url_openner('chrome://bookmarks/');
   }
 
   function init_bookmarks() {
-    bookmarks_root_element.innerText = '';
-    bookmarks_root_element.onclick = undefined;
-    bookmarks_root_element.style.cursor = 'default';
-    storage.get({stoplist: null}, function(sl) {
-      sl = sl.stoplist;
-      if (sl === null) {
-        sl = {};
-      }
-      chrome.bookmarks.getTree(function (childrens) {
-        build_tree(bookmarks_root_element, childrens, sl);
-      });
-    });
-    var e = document.getElementById('edit-bookmarks');
-    e.style.display = 'block';
-    e.onclick = function () {
-      chrome.tabs.create({
-        active: true,
-        url: 'chrome://bookmarks/'
-      });
-    };
-    chrome.bookmarks.onChanged.addListener(init_bookmarks);
-    chrome.bookmarks.onMoved.addListener(init_bookmarks);
-    chrome.bookmarks.onChildrenReordered.addListener(init_bookmarks);
-    chrome.bookmarks.onImportEnded.addListener(init_bookmarks);
+    bind_listeners(redraw_tree);
+    redraw_tree();
+    show_edit_link();
   }
 
-  chrome.permissions.contains(permissions, function (x) {
-    if (x) {
-      init_bookmarks();
-    } else {
-      bookmarks_root_element.innerText = 'bookmarks';
-      bookmarks_root_element.onclick = function () {
-        chrome.permissions.request(permissions, function (x) {
-          if (x) {
-            init_bookmarks();
-          }
-        });
-      };
-      bookmarks_root_element.style.cursor = 'pointer';
-    }
-  });
+  permissions_request(bookmarks_root_element, init_bookmarks);
 
 }());

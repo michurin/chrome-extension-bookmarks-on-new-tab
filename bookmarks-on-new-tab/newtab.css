@@ -1,4 +1,5 @@
 body {
+  user-select: none;
   -webkit-user-select: none;
   font-family: Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif;
   background: #fff;
@@ -20,20 +21,26 @@ h1 {
   padding: 4px;
 }
 
-#edit-bookmarks {
+#control-box {
   position: absolute;
   top: 0;
   right: 0;
-  background: #eee;
   padding: 5px;
   font-size: 10px;
-  display: none;
-  color: rgb(200, 200, 200);
-  cursor: pointer;
+  color: #ccc;
 }
 
-#edit-bookmarks:hover {
+#control-box div {
+  cursor: pointer;
+  display: inline-block;
+}
+
+#control-box div:hover {
   color: #444;
+}
+
+#edit-bookmarks {
+  display: none;
 }
 
 .title {
