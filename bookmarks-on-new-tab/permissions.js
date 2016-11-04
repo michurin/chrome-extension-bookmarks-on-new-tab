@@ -11,7 +11,10 @@
 
 function permissions_request (root_element, init_func) {
 
-  var permissions = {permissions: ['bookmarks']};
+  var permissions = {
+    permissions: ['bookmarks'],
+    origins: ['chrome://favicon/']
+  };
 
   chrome.permissions.contains(permissions, function (x) {
     if (x) {
