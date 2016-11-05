@@ -3,7 +3,7 @@ body {
   -webkit-user-select: none;
   font-family: Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif;
   background: #fff;
-  color: #888;
+  color: #444;
   font-size: 16px;
   line-height: 100%;
 }
@@ -65,6 +65,10 @@ body {
 }
 
 /* other */
+
+#font_size div {
+  cursor: pointer;
+}
 
 #reset {
   text-align: center;

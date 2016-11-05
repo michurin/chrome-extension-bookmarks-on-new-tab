@@ -89,10 +89,46 @@
     });
   }
 
+  var valid_font_sizes = [8, 10, 12, 14, 16, 18, 20];
+
+  function cpan_with_text(text) {
+    var e = document.createElement('span');
+    e.innerText = text;
+    return e;
+  }
+
+  function redraw_font_size_selector() {
+    chrome.storage.local.get({font_size: 18}, function (value) {
+      var font_size = parseInt(value.font_size, 10);
+      if (valid_font_sizes.indexOf(font_size) < 0) {
+        font_size = 18;
+      }
+      var element = document.getElementById('font_size');
+      var nodes = element.querySelectorAll('div');
+      for (var i = 0; i < nodes.length; i++) {
+        element.removeChild(nodes[i]);
+      }
+      valid_font_sizes.forEach(function(v) {
+        var e = document.createElement('div');
+        e.appendChild(cpan_with_text(v === font_size ? '☑' : '☐'));
+        e.appendChild(cpan_with_text(' ' + v + 'px'));
+        e.onclick = function () {
+          chrome.storage.local.set({font_size: v});
+        };
+        element.appendChild(e);
+      });
+    });
+  }
+
   function init_bookmarks() {
-    bind_listeners(redraw_tree);
+    bind_listeners(function () {
+      redraw_tree();
+      redraw_font_size_selector();
+    });
     redraw_tree();
   }
+
+  redraw_font_size_selector();
 
   permissions_request(bookmarks_root_element, init_bookmarks);
 

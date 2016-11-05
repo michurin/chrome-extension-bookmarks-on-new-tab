@@ -75,7 +75,6 @@
     });
   }
 
-
   function redraw_tree() {
     storage.get({stoplist: null, root_id: null}, function(value) {
       var stoplist = value.stoplist;
@@ -103,11 +102,23 @@
     e.onclick = url_openner('chrome://bookmarks/');
   }
 
+  function set_font_size() {
+    storage.get({font_size: 16}, function(value) {
+      var font_size = Math.min(20, Math.max(8, parseInt(value.font_size, 10)));
+      bookmarks_root_element.style.fontSize = font_size + 'px';
+    });
+  }
+
   function init_bookmarks() {
-    bind_listeners(redraw_tree);
+    bind_listeners(function () {
+      redraw_tree();
+      set_font_size();
+    });
     redraw_tree();
     show_edit_link();
   }
+
+  set_font_size();
 
   permissions_request(bookmarks_root_element, init_bookmarks);
 
