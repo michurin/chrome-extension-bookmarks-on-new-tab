@@ -3,7 +3,7 @@ body {
   -webkit-user-select: none;
   font-family: Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif;
   background: #fff;
-  color: #888;
+  color: #444;
   padding: 0;
   margin: 0;
   font-size: 16px;
@@ -12,6 +12,7 @@ body {
 
 h1 {
   margin: 0;
+  color: #888;
   padding: 5px 5px;
   font-size: 18px;
   background: #eee;
