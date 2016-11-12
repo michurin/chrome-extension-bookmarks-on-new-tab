@@ -4,7 +4,8 @@
  * MIT License [http://www.opensource.org/licenses/mit-license.php]
  */
 
-/*global window, chrome, permissions_request, bind_listeners, url_openner */
+/*global window, chrome */
+/*global permissions_request, bind_bookmarks_listeners, bind_storage_listeners, url_openner */
 
 'use strict';
 
@@ -17,6 +18,7 @@
   var storage = chrome.storage.local;
   var document = window.document;
   var bookmarks_root_element = document.getElementById('bookmarks');
+  var body_element = document.getElementsByTagName('body')[0];
 
   function div(c) {
     var e = document.createElement('div');
@@ -105,18 +107,18 @@
   function set_font_size() {
     storage.get({font_size: 16}, function(value) {
       var font_size = Math.min(20, Math.max(8, parseInt(value.font_size, 10)));
-      bookmarks_root_element.style.fontSize = font_size + 'px';
+      body_element.style.fontSize = font_size + 'px';
     });
   }
 
   function init_bookmarks() {
-    bind_listeners(function () {
-      redraw_tree();
-      set_font_size();
-    });
-    redraw_tree();
     show_edit_link();
+    redraw_tree();
+    bind_bookmarks_listeners(redraw_tree);
+    bind_storage_listeners(redraw_tree);
   }
+
+  bind_storage_listeners(set_font_size);
 
   set_font_size();
 

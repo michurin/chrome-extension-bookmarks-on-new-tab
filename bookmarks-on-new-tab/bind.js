@@ -5,13 +5,16 @@
  */
 
 /*global chrome */
-/*exported bind_listeners */
+/*exported bind_bookmarks_listeners, bind_storage_listeners */
 
 'use strict';
 
-function bind_listeners(redraw_func) {
+function bind_bookmarks_listeners(redraw_func) {
   ['Created', 'Removed', 'Changed', 'Moved', 'ChildrenReordered', 'ImportEnded'].forEach(function (ev) {
     chrome.bookmarks['on' + ev].addListener(redraw_func);
   });
+}
+
+function bind_storage_listeners(redraw_func) {
   chrome.storage.onChanged.addListener(redraw_func);
 }

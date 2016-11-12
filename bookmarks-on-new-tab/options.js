@@ -4,7 +4,8 @@
  * MIT License [http://www.opensource.org/licenses/mit-license.php]
  */
 
-/*global window, chrome, permissions_request, bind_listeners */
+/*global window, chrome */
+/*global permissions_request, bind_bookmarks_listeners, bind_storage_listeners */
 
 (function () {
 
@@ -90,6 +91,7 @@
   }
 
   var valid_font_sizes = [8, 10, 12, 14, 16, 18, 20];
+  var default_font_size = 14;
 
   function cpan_with_text(text) {
     var e = document.createElement('span');
@@ -98,10 +100,10 @@
   }
 
   function redraw_font_size_selector() {
-    chrome.storage.local.get({font_size: 18}, function (value) {
+    chrome.storage.local.get({font_size: default_font_size}, function (value) {
       var font_size = parseInt(value.font_size, 10);
       if (valid_font_sizes.indexOf(font_size) < 0) {
-        font_size = 18;
+        font_size = default_font_size;
       }
       var element = document.getElementById('font_size');
       var nodes = element.querySelectorAll('div');
@@ -121,14 +123,13 @@
   }
 
   function init_bookmarks() {
-    bind_listeners(function () {
-      redraw_tree();
-      redraw_font_size_selector();
-    });
     redraw_tree();
+    bind_bookmarks_listeners(redraw_tree);
+    bind_storage_listeners(redraw_tree);
   }
 
   redraw_font_size_selector();
+  bind_storage_listeners(redraw_font_size_selector);
 
   permissions_request(bookmarks_root_element, init_bookmarks);
 

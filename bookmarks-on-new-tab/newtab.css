@@ -13,9 +13,12 @@ body {
 h1 {
   margin: 0;
   color: #888;
-  padding: 5px 5px;
-  font-size: 18px;
-  background: #eee;
+  padding: 4px 4px;
+  font-size: 120%;
+  font-weight: normal;
+  border-color: #888;
+  border-width: 0 0 1px 0;
+  border-style: solid;
 }
 
 #bookmarks {
@@ -27,7 +30,7 @@ h1 {
   top: 0;
   right: 0;
   padding: 5px;
-  font-size: 10px;
+  font-size: 60%;
   color: #ccc;
 }
 
