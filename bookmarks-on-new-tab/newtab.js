@@ -44,9 +44,7 @@
         text.appendChild(label);
         item.title = v.title;
         item.appendChild(text);
-        item.onclick = function () {
-          window.location.href = v.url;
-        };
+        item.onclick = url_openner(v.url); // support data scheme etc.
         root_element.appendChild(item);
       } else {
         var folder = div(stoplist[v.id] ? 'closed-folder' : 'folder');
