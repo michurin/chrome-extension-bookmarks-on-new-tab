@@ -10,13 +10,12 @@
 'use strict';
 
 function url_openner(url) {
-  return function () {
-    chrome.tabs.update(
-      null,
-      {
-        active: true,
-        url: url
-      }
-    );
+  var tabParams = {url: url};
+  return function (e) {
+    if (e.shiftKey) {
+      chrome.tabs.create(tabParams);
+      return;
+    }
+    chrome.tabs.update(null, tabParams);
   };
 }
