@@ -9,7 +9,7 @@
 
 'use strict';
 
-function permissions_request (root_element, init_func) {
+function permissions_request (root_element, init_func) { // TODO this function have to be removed; permissions are mandatory
 
   var permissions = {
     permissions: ['bookmarks'],

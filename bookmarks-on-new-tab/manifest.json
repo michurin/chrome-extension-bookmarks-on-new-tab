@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "Ultra light newtab page with bookmarks on it",
-  "version": "0.5.2.0",
+  "version": "0.5.2.1",
   "minimum_chrome_version": "16",
 
   "description": "Ultra light new tab with bookmark navigator",
@@ -41,7 +41,9 @@
 
   "chrome_url_overrides": {"newtab": "newtab.html"},
 
-  "permissions": ["storage"],
-
-  "optional_permissions": ["bookmarks", "chrome://favicon/"]
+  "permissions": [
+      "storage",
+      "bookmarks",
+      "chrome://favicon/"
+  ]
 }
